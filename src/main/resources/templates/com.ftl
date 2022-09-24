@@ -1,1 +1,1 @@
-<el-button>${root.comName}</el-button>
+<#include "button.ftl">
