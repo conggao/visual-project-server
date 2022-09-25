@@ -16,6 +16,7 @@
 
 package com.gc.vp.web;
 
+import com.gc.vp.entity.TransDto;
 import com.gc.vp.entity.code.ComTreeReq;
 import com.gc.vp.service.GenCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class GenCodeController {
     private GenCodeService genCodeService;
 
     @PostMapping("/gen")
-    public String genCode(@RequestBody List<ComTreeReq> coms) {
-        return genCodeService.genCode(coms);
+    public TransDto<String> genCode(@RequestBody List<ComTreeReq> coms) {
+        return TransDto.success(genCodeService.genCode(coms));
     }
 }
