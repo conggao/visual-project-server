@@ -5,9 +5,27 @@
 <#--  当前节点是容器  -->
 <#assign comList=root.childrens/>
 <#assign n=n/>
-<div>
+<#switch root.comName>
+    <#case "form">
+        <#include "form_start.ftl">
+        <#break/>
+    <#case "checkbox">
+        <#include "checkbox.ftl">
+        <#break/>
+    <#default>
+        <div>
+</#switch>
 <#include "com_container.ftl">
-</div>
+<#switch root.comName>
+    <#case "form">
+        <#include "form_end.ftl">
+        <#break/>
+    <#case "checkbox">
+        <#include "checkbox.ftl">
+        <#break/>
+    <#default>
+        </div>
+</#switch>
 <#else>
 <#--  当前节点是组件  -->
 <#include "com.ftl">

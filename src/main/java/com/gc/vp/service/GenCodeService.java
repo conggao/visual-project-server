@@ -1,6 +1,6 @@
 package com.gc.vp.service;
 
-import com.gc.vp.entity.code.ComTreeReq;
+import com.gc.vp.entity.vo.code.ComTreeReq;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

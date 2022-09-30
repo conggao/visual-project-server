@@ -3,7 +3,7 @@ package com.gc.vp.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gc.vp.VisualProjectApplication;
-import com.gc.vp.entity.code.ComTreeReq;
+import com.gc.vp.entity.vo.code.ComTreeReq;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = VisualProjectApplication.class)

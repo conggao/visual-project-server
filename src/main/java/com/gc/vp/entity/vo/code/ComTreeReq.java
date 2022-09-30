@@ -1,4 +1,4 @@
-package com.gc.vp.entity.code;
+package com.gc.vp.entity.vo.code;
 
 import lombok.Data;
 
