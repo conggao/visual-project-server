@@ -1,6 +1,6 @@
 package com.gc.vp.service;
 
-import com.gc.vp.dao.DataSourceRepository;
+import com.gc.vp.repository.DataSourceRepository;
 import com.gc.vp.entity.po.DataSourcePo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

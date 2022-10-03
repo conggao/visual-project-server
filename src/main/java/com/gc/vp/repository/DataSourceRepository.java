@@ -1,4 +1,4 @@
-package com.gc.vp.dao;
+package com.gc.vp.repository;
 
 import com.gc.vp.entity.po.DataSourcePo;
 import org.springframework.data.jpa.repository.JpaRepository;
