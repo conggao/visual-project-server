@@ -1,14 +1,11 @@
 package com.gc.vp.config.filter;
 
-import boss.portal.constant.ConstantKey;
-import boss.portal.entity.User;
-import boss.portal.result.Result;
-import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gc.vp.constant.ConstantKey;
+import com.gc.vp.entity.vo.TransDto;
+import com.gc.vp.utils.JsonUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,18 +24,18 @@ import java.util.*;
  * 该类继承自UsernamePasswordAuthenticationFilter，重写了其中的2个方法
  * attemptAuthentication ：接收并解析用户凭证。
  * successfulAuthentication ：用户成功登录后，这个方法会被调用，我们在这个方法里生成token。
- * @author zhaoxinguo on 2017/9/12.
  */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
-    
+
     public JWTLoginFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
     /**
      * 尝试身份认证(接收并解析用户凭证)
+     *
      * @param req
      * @param res
      * @return
@@ -46,21 +43,23 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
-        try {
-            User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            user.getUsername(),
-                            user.getPassword(),
-                            new ArrayList<>())
-            );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            UserPo user = new ObjectMapper().readValue(req.getInputStream(), UserPo.class);
+//            return authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(
+//                            user.getUsername(),
+//                            user.getPassword(),
+//                            new ArrayList<>())
+//            );
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        return null;
     }
 
     /**
      * 认证成功(用户成功登录后，这个方法会被调用，我们在这个方法里生成token)
+     *
      * @param request
      * @param response
      * @param chain
@@ -82,7 +81,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             for (GrantedAuthority grantedAuthority : authorities) {
                 roleList.add(grantedAuthority.getAuthority());
             }
-            
+
             // 生成token start
             Calendar calendar = Calendar.getInstance();
             Date now = calendar.getTime();
@@ -98,15 +97,15 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                     .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
                     .compact();
             // 生成token end
-            
+
             // 登录成功后，返回token到header里面
             /*response.addHeader("Authorization", "Bearer " + token);*/
 
             // 登录成功后，返回token到body里面
             Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("Authorization", "Bearer " + token);
-            Result result = Result.ok(resultMap);
-            response.getWriter().write(JSON.toJSONString(result));
+            resultMap.put("Authorization", token);
+            TransDto result = TransDto.success(resultMap);
+            response.getWriter().write(JsonUtils.stringify(result));
 
         } catch (Exception e) {
             e.printStackTrace();

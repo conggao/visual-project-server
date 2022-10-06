@@ -16,11 +16,15 @@
 
 package com.gc.vp;
 
+import com.gc.vp.utils.ApplicationUtil;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.util.HashMap;
@@ -29,6 +33,7 @@ import java.util.Map;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@MapperScan("com.gc.vp.mapper")
 public class VisualProjectApplication {
 	@Bean(name = "freeMarkerConfigurer")
 	public FreeMarkerConfigurer freeMarkerConfigurer() {
@@ -39,6 +44,27 @@ public class VisualProjectApplication {
 		variables.put("xml_escape","fmXmlEscape");
 		configurer.setFreemarkerVariables(variables);
 		return configurer;
+	}
+	@Bean
+	public ThreadPoolTaskExecutor taskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(20);
+		executor.setMaxPoolSize(100);
+		executor.setKeepAliveSeconds(30000);
+		executor.setQueueCapacity(100);
+		executor.setThreadNamePrefix("default_task_executor_thread");
+		executor.initialize();
+		return executor;
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public ApplicationUtil applicationUtil() {
+		return new ApplicationUtil();
 	}
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(VisualProjectApplication.class, args);

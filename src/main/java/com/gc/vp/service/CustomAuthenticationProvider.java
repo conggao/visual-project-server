@@ -31,16 +31,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     /**
      * 执行与以下合同相同的身份验证
-     * {@link org.springframework.security.authentication.AuthenticationManager＃authenticate（Authentication）}
-     * 。
+     * {@link org.springframework.security.authentication.AuthenticationManager＃authenticate（Authentication）}。
      *
      * @param authentication 身份验证请求对象。
      * @throws AuthenticationException 如果身份验证失败。
-     * @返回包含凭证的经过完全认证的对象。 可能会回来
-     * <code> null </ code>（如果<code> AuthenticationProvider </ code>无法支持）
-     * 对传递的<code> Authentication </ code>对象的身份验证。 在这种情况下，
-     * 支持所提供的下一个<code> AuthenticationProvider </ code>
-     * 将尝试<code> Authentication </ code>类。
+     * @return 返回包含凭证的经过完全认证的对象。 可能会回来 null（如果AuthenticationProvider无法支持）
+     * 对传递的<code> Authentication </ code>对象的身份验证。
+     * 在这种情况下，支持所提供的下一个 AuthenticationProvider将尝试<code> Authentication </code>类。
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

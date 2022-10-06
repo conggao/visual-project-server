@@ -1,20 +1,113 @@
 package com.gc.vp.entity.po;
 
-import lombok.Data;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "user_po")
-@SQLDelete(sql = "update vp_datasource set status=0 where id=?")
-@Where(clause = "status=1")
-@Data
-public class UserPo extends BasePo {
-    @Column(name = "user_name")
-    private String username;
+/**
+ * <p>
+ * 用户表
+ * </p>
+ *
+ * @author conggao
+ * @since 2022-10-06
+ */
+@Getter
+@Setter
+@Accessors(chain = true)
+@TableName("vp_user")
+public class UserPo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    public UserPo(String userName, String password, String createUser, String updateUser) {
+        this.userName = userName;
+        this.password = password;
+        this.createUser = createUser;
+        this.updateUser = updateUser;
+    }
+
+    /**
+     * 主键
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    /**
+     * 用户名
+     */
+    private String userName;
+
+    /**
+     * 昵称
+     */
+    private String nickName;
+
+    /**
+     * 密码
+     */
     private String password;
+
+    /**
+     * 账号状态（0停用 1正常）
+     */
+    @TableLogic
+    private String enable;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 手机号
+     */
+    @TableField(value = "phone")
+    private String phone;
+
+    /**
+     * 用户性别（0男，1女，2未知）
+     */
+    private String sex;
+
+    /**
+     * 头像
+     */
+    private String avatar;
+
+    /**
+     * 用户类型（0管理员，1普通用户）
+     */
+    private String userType;
+
+    /**
+     * 创建人的用户id
+     */
+    private String createUser;
+
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    /**
+     * 更新人
+     */
+    private String updateUser;
+
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    /**
+     * 删除标志（0代表未删除，1代表已删除）
+     */
+    private Integer delFlag;
 }

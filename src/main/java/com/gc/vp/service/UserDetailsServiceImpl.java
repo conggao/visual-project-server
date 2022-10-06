@@ -1,7 +1,6 @@
 package com.gc.vp.service;
 
 import com.gc.vp.entity.po.UserPo;
-import com.gc.vp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,15 +16,15 @@ import static java.util.Collections.emptyList;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserPo user = userRepository.findByUsername(username);
+        UserPo user = userService.findByUserName(username);
         if(user == null){
             throw new UsernameNotFoundException(username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), emptyList());
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), emptyList());
     }
 
 }

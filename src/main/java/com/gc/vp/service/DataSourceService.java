@@ -1,7 +1,7 @@
 package com.gc.vp.service;
 
-import com.gc.vp.repository.DataSourceRepository;
-import com.gc.vp.entity.po.DataSourcePo;
+import com.gc.vp.entity.po.DatasourcePo;
+import com.gc.vp.entity.vo.TransDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +10,13 @@ import java.util.List;
 @Service
 public class DataSourceService {
     @Autowired
-    private DataSourceRepository dataSourceRepository;
+    private IDatasourceService datasourceService;
 
-    public List<DataSourcePo> list() {
-        return dataSourceRepository.findAll();
+    public TransDto<List<DatasourcePo>> list() {
+        return TransDto.success(datasourceService.list());
     }
-    public DataSourcePo add(DataSourcePo dataSourceConfig){
+    public TransDto<Boolean> add(DatasourcePo dataSourceConfig){
         dataSourceConfig.setEnable(true);
-        return dataSourceRepository.save(dataSourceConfig);
+        return TransDto.success(datasourceService.save(dataSourceConfig));
     }
 }

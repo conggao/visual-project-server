@@ -1,8 +1,11 @@
 package com.gc.vp.web;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gc.vp.entity.po.UserPo;
+import com.gc.vp.entity.vo.TransDto;
+import com.gc.vp.entity.vo.master.RegisterReq;
 import com.gc.vp.exception.BusinessException;
-import com.gc.vp.repository.UserRepository;
+import com.gc.vp.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,23 +24,23 @@ import java.util.*;
 @Slf4j
 public class MasterController {
     @Autowired
-    private UserRepository userRepository;
+    private IUserService userService;
     @Autowired
     protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 注册用户 默认开启白名单
      *
-     * @param user
+     * @param registerReq
      */
     @PostMapping("/register")
-    public UserPo register(@RequestBody UserPo user) {
-        UserPo bizUser = userRepository.findByUsername(user.getUsername());
+    public TransDto<Boolean> register(@RequestBody RegisterReq registerReq) {
+        UserPo bizUser = userService.getOne(new LambdaQueryWrapper<UserPo>().eq(UserPo::getUserName, registerReq.getUserName()));
         if (null != bizUser) {
             throw new BusinessException(1001, "用户已经存在");
         }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        String password = bCryptPasswordEncoder.encode(registerReq.getPassword());
+        return TransDto.success(userService.save(new UserPo(registerReq.getUserName(), password, "system", "system")));
     }
 
     /**
@@ -47,8 +50,7 @@ public class MasterController {
      */
     @GetMapping("/userList")
     public Map<String, Object> userList() {
-        List<UserPo> users = userRepository.findAll();
-        log.info("users: {}", users);
+        List<UserPo> users = userService.list();
         Map<String, Object> map = new HashMap<>();
         map.put("users", users);
         return map;
