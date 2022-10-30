@@ -1,11 +1,14 @@
 package com.gc.vp.config.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gc.vp.constant.ConstantKey;
+import com.gc.vp.entity.po.UserPo;
 import com.gc.vp.entity.vo.TransDto;
 import com.gc.vp.utils.JsonUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,18 +46,17 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
-//        try {
-//            UserPo user = new ObjectMapper().readValue(req.getInputStream(), UserPo.class);
-//            return authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(
-//                            user.getUsername(),
-//                            user.getPassword(),
-//                            new ArrayList<>())
-//            );
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-        return null;
+        try {
+            UserPo user = new ObjectMapper().readValue(req.getInputStream(), UserPo.class);
+            return authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getUserName(),
+                            user.getPassword(),
+                            new ArrayList<>())
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

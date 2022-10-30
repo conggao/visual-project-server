@@ -2,6 +2,7 @@ package com.gc.vp.entity.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 @Setter
 @Accessors(chain = true)
 @TableName("vp_user")
+@NoArgsConstructor
 public class UserPo implements Serializable {
 
     private static final long serialVersionUID = 1L;

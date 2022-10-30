@@ -3,7 +3,7 @@ package com.gc.vp.config;
 import com.gc.vp.config.filter.JWTAuthenticationFilter;
 import com.gc.vp.config.filter.JWTLoginFilter;
 import com.gc.vp.exception.Http401AuthenticationEntryPoint;
-import com.gc.vp.service.CustomAuthenticationProvider;
+import com.gc.vp.service.impl.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -18,7 +18,7 @@ package com.gc.vp.web;
 
 import com.gc.vp.entity.vo.TransDto;
 import com.gc.vp.entity.vo.code.ComTreeReq;
-import com.gc.vp.service.GenCodeService;
+import com.gc.vp.service.impl.GenCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -2,7 +2,7 @@ package com.gc.vp.config.filter;
 
 import com.gc.vp.constant.ConstantKey;
 import com.gc.vp.exception.BusinessException;
-import com.gc.vp.service.GrantedAuthorityImpl;
+import com.gc.vp.service.impl.GrantedAuthorityImpl;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +29,6 @@ import java.util.Date;
  */
 @Slf4j
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
-
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
@@ -82,7 +81,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
                 // 设置签发时间
                 calendar.setTime(new Date());
                 // 设置过期时间
-                calendar.add(Calendar.MINUTE, 5);// 5分钟
+                calendar.add(Calendar.YEAR, 5);// 5分钟
                 Date time = calendar.getTime();
                 String refreshToken = Jwts.builder()
                         .setSubject(claims.getSubject())

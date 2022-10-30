@@ -1,4 +1,4 @@
-package com.gc.vp.service;
+package com.gc.vp.service.impl;
 
 import com.gc.vp.entity.vo.code.ComTreeReq;
 import freemarker.template.Configuration;

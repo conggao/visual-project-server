@@ -1,4 +1,4 @@
-package com.gc.vp.service;
+package com.gc.vp.service.impl;
 
 import org.springframework.security.core.GrantedAuthority;
 

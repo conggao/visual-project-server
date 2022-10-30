@@ -1,6 +1,7 @@
-package com.gc.vp.service;
+package com.gc.vp.service.impl;
 
 import com.gc.vp.entity.po.UserPo;
+import com.gc.vp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
