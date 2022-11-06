@@ -10,7 +10,7 @@
     </parent>
     <artifactId>visual-project-server</artifactId>
     <groupId>org.example</groupId>
-    <name>Spring Boot Data JPA Sample</name>
+    <name>visual-project-server</name>
     <description>Spring Boot Data JPA Sample</description>
     <version>1.0-SNAPSHOT</version>
     <url>http://projects.spring.io/spring-boot/</url>
@@ -95,5 +95,41 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
