@@ -20,6 +20,8 @@ import com.gc.vp.utils.ApplicationUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,9 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@ComponentScan
-@EnableAutoConfiguration
 @MapperScan("com.gc.vp.mapper")
+@SpringBootApplication
 public class VisualProjectApplication {
 	@Bean(name = "freeMarkerConfigurer")
 	public FreeMarkerConfigurer freeMarkerConfigurer() {
