@@ -6,6 +6,7 @@ import com.gc.vp.entity.vo.TransDto;
 import com.gc.vp.entity.vo.ds.ListDatasourceReq;
 import com.gc.vp.service.IDatasourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,9 +32,11 @@ public class DatasourceController {
      */
     @PostMapping("/list")
     public TransDto<List<DatasourcePo>> list(@RequestBody ListDatasourceReq req) {
-        return TransDto.success(dataSourceService.list(
-                new LambdaQueryWrapper<DatasourcePo>().like(DatasourcePo::getName, req.getKeyword())
-        ));
+        LambdaQueryWrapper<DatasourcePo> queryWrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.hasText(req.getKeyword())) {
+            queryWrapper.like(DatasourcePo::getName, req.getKeyword());
+        }
+        return TransDto.success(dataSourceService.list(queryWrapper));
     }
 
     /**
