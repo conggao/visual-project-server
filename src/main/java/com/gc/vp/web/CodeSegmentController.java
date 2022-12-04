@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 代码分类
+ * 代码片段
  */
 @RestController
 @RequestMapping("/api/code/segment")
@@ -44,8 +44,11 @@ public class CodeSegmentController {
             @RequestHeader("loginUser") String loginUser,
             @RequestBody CodeSegmentPo req
     ) {
-        req.setCreateUser(loginUser);
-        req.setUpdateUser(loginUser);
-        return TransDto.success(codeSegmentService.save(req));
+        if (Objects.nonNull(req.getId())){
+            req.setUpdateUser(loginUser);
+        }else {
+            req.setCreateUser(loginUser);
+        }
+        return TransDto.success(codeSegmentService.saveOrUpdate(req));
     }
 }

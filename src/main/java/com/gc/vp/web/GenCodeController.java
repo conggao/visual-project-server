@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * 代码生成
+ */
 @RequestMapping("/api/code")
 @RestController
 public class GenCodeController {

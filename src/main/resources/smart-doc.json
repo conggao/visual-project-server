@@ -1,0 +1,32 @@
+{
+  "openUrl": "http://127.0.0.1:7700/api",
+  "appToken": "38b3210948a244e4a16bf98e99ea938e",
+  "outPath": "src/main/resources/static/doc",
+  "isStrict": false,
+  "createDebugPage": false,
+  "packageFilters": "com.gc.vp.web.*",
+  "style": "xt256",
+  "showAuthor": true,
+  "inlineEnum": true,
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "_revisionTime": "文档修订时间",
+      "revisionTime": "2020-12-31 10:30",
+      "_status": "update,create可选",
+      "status": "update",
+      "author": "author",
+      "_remarks": "变更描述",
+      "remarks": "desc"
+    }
+  ],
+  "errorCodeDictionaries": [
+    {
+      "title": "title",
+      "enumClassName": "com.gc.vp.entity.vo.enums.ErrorCodeEnum",
+      "codeField": "code",
+      "descField": "message"
+    }
+  ]
+}
+

@@ -29,7 +29,7 @@ public class CodeCategoryController {
     public TransDto<List<CodeCategoryPo>> list(@RequestBody ListCodeCategoryReq req) {
         LambdaQueryWrapper<CodeCategoryPo> queryWrapper = new LambdaQueryWrapper<>();
         if (Objects.nonNull(req.getCategoryId())) {
-            queryWrapper.like(CodeCategoryPo::getParentId, req.getCategoryId());
+            queryWrapper.eq(CodeCategoryPo::getParentId, req.getCategoryId());
         }
         return TransDto.success(codeCategoryService.list(queryWrapper));
     }
@@ -44,8 +44,23 @@ public class CodeCategoryController {
             @RequestHeader("loginUser") String loginUser,
             @RequestBody CodeCategoryPo req
     ) {
-        req.setCreateUser(loginUser);
-        req.setUpdateUser(loginUser);
-        return TransDto.success(codeCategoryService.save(req));
+        if (Objects.nonNull(req.getId())){
+            req.setUpdateUser(loginUser);
+        }else {
+            req.setCreateUser(loginUser);
+        }
+        return TransDto.success(codeCategoryService.saveOrUpdate(req));
+    }
+
+    /**
+     * 删除分类
+     * @param id 分类id
+     * @return
+     */
+    @GetMapping("/del")
+    public TransDto<Boolean> del(
+            @RequestParam("id") Integer id
+    ) {
+        return TransDto.success(codeCategoryService.removeById(id));
     }
 }
