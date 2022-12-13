@@ -1,15 +1,12 @@
 package com.gc.vp.entity.po;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -30,8 +27,17 @@ public class CodeSegmentPo implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @TableField("type")
+    private Integer type;
+
     @TableField("category_id")
     private Integer categoryId;
+
+    @TableField("title")
+    private String title;
+
+    @TableField("language")
+    private String language;
 
     @TableField("content")
     private String content;

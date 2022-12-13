@@ -34,21 +34,34 @@ public class CodeSegmentController {
         return TransDto.success(codeSegmentService.list(queryWrapper));
     }
 
+    @GetMapping("/listAllBlockTemplate")
+    public TransDto<List<CodeSegmentPo>> list() {
+        LambdaQueryWrapper<CodeSegmentPo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(CodeSegmentPo::getType, 2);
+        return TransDto.success(codeSegmentService.list(queryWrapper));
+    }
+
     /**
      * 新增代码片段配置
      *
      * @return
      */
     @PostMapping("/add")
-    public TransDto<Boolean> add(
+    public TransDto<CodeSegmentPo> add(
             @RequestHeader("loginUser") String loginUser,
             @RequestBody CodeSegmentPo req
     ) {
-        if (Objects.nonNull(req.getId())){
+        if (Objects.nonNull(req.getId())) {
             req.setUpdateUser(loginUser);
-        }else {
+        } else {
             req.setCreateUser(loginUser);
         }
-        return TransDto.success(codeSegmentService.saveOrUpdate(req));
+        codeSegmentService.saveOrUpdate(req);
+        return TransDto.success(req);
+    }
+
+    @GetMapping("/detail")
+    public TransDto<CodeSegmentPo> detail(@RequestParam("id") Integer id) {
+        return TransDto.success(codeSegmentService.getById(id));
     }
 }

@@ -5,6 +5,7 @@ create table vp_datasource
     id          int auto_increment
         primary key,
     name        varchar(255)                         not null,
+    content     text                                 not null,
     comment     text                                 null,
     create_time timestamp  default CURRENT_TIMESTAMP not null,
     create_user varchar(50)                          not null,
@@ -52,7 +53,12 @@ create table vp_code_segment
 (
     id          int auto_increment
         primary key,
+    type        int default 1 not null comment '类型
+1：普通代码片段
+2：block组件模板',
     category_id int           not null,
+    title       varchar(100)  not null comment '标题',
+    language    varchar(50)   not null comment '编程语言',
     content     text          not null,
     create_user varchar(50)   null comment '创建人的用户id',
     create_time datetime      null comment '创建时间',
@@ -61,4 +67,3 @@ create table vp_code_segment
     del_flag    int default 0 null comment '删除标志（0代表未删除，1代表已删除）'
 )
     comment '代码片段';
-
