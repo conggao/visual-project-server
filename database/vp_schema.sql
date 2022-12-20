@@ -55,8 +55,9 @@ create table vp_code_segment
         primary key,
     type        int default 1 not null comment '类型
 1：普通代码片段
-2：block组件模板',
-    category_id int           not null,
+2：block组件模板
+3：样式模板',
+    category_id int default 0 not null,
     title       varchar(100)  not null comment '标题',
     language    varchar(50)   not null comment '编程语言',
     content     text          not null,
